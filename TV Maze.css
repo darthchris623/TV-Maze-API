@@ -1,0 +1,11 @@
+body {
+    background-color: rgb(177, 174, 174);
+}
+
+button {
+    cursor: pointer;
+}
+
+ul {
+    float: left;
+}
