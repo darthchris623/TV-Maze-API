@@ -20,7 +20,13 @@ async function getShow(show) {
     try {
         const img = document.createElement('img'); // Creates image tag for show image
         const response = await axios.get(`https://api.tvmaze.com/singlesearch/shows?q=${show}`);
-        img.setAttribute('src', `${response.data.image.medium}`); // Renders the TV show image to the DOM
+        // If there is no image, a different image will load
+        if (!response.data.image.medium) {
+            img.setAttribute('src', 'https://t4.ftcdn.net/jpg/04/00/24/31/240_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg');
+        }
+        else {
+            img.setAttribute('src', `${response.data.image.medium}`);// Renders the TV show image to the DOM
+        }
         $show.append(img);
         const h3 = document.createElement('h3');
         h3.innerText = `${response.data.name}`; // Displays the name of the show
