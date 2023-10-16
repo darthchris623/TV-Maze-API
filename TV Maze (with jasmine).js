@@ -1,17 +1,6 @@
 console.log('TV Maze with Jasmine testing');
 
 describe('getShow application should retrive show information and render it to the DOM', function () {
-    // it('should retrive show information', function () {
-    //     // arrange
-    //     const show = 'Friends';
-
-    //     // act
-    //     const response = getShow(show);
-
-    //     // assert
-    //     expect(response);
-
-    // });
     it('should call getShow() when information is passed in', function () {
         spyOn(window, 'getShow');
 
@@ -24,6 +13,7 @@ describe('getShow application should retrive show information and render it to t
         input.value = 'Friends';
         show.setAttribute('id', 'show');
         // const response = axios.get(`https://api.tvmaze.com/singlesearch/shows?q=${input.value}`);
+        
         // Creating the submit button and adding the event listener
         const submit = document.createElement('button');
         submit.addEventListener('click', function (event) {
@@ -39,14 +29,12 @@ describe('getShow application should retrive show information and render it to t
         // h3.setAttribute('id', `${response.data.id}`);
         // h3.innerText = `${response.data.name}`;
 
-
         // Appending the input and button to the DOM
         show.append(h3);
         // show.append(`${response.data.summary}`);
         form.append(input);
         form.append(submit);
         document.body.append(form);
-
 
         // Triggering the "click" event on the submit button
         submit.dispatchEvent(new Event('click'));
@@ -77,10 +65,7 @@ describe('getShow application should retrive show information and render it to t
         // Triggering the "click" event on the submit button
         getEpisodeButton.dispatchEvent(new Event('click'));
 
-
         // Checking to see if appendResults() was called
         expect(getEpisodes).toHaveBeenCalled();
-
     });
-
 });
