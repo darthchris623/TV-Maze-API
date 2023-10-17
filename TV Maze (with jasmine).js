@@ -8,11 +8,10 @@ describe('getShow application should retrive show information and render it to t
         const form = document.createElement('form');
         const input = document.createElement('input');
         const show = document.createElement('section');
-        
+        const h3 = document.createElement('h3');
         input.setAttribute('type', 'text');
         input.value = 'Friends';
         show.setAttribute('id', 'show');
-        // const response = axios.get(`https://api.tvmaze.com/singlesearch/shows?q=${input.value}`);
         
         // Creating the submit button and adding the event listener
         const submit = document.createElement('button');
@@ -21,17 +20,12 @@ describe('getShow application should retrive show information and render it to t
             getShow(input.value);
         });
 
-        // Creating HTML elements
+        // Creating the button, and adding the event listener
         const getEpisodeButton = document.createElement('button');
-        // getEpisodeButton.innerText = 'Get episodes';
         getEpisodeButton.addEventListener('click', getEpisodes);
-        const h3 = document.createElement('h3');
-        // h3.setAttribute('id', `${response.data.id}`);
-        // h3.innerText = `${response.data.name}`;
 
         // Appending the input and button to the DOM
         show.append(h3);
-        // show.append(`${response.data.summary}`);
         form.append(input);
         form.append(submit);
         document.body.append(form);
@@ -39,7 +33,7 @@ describe('getShow application should retrive show information and render it to t
         // Triggering the "click" event on the submit button
         submit.dispatchEvent(new Event('click'));
 
-        // Checking to see if appendResults() was called
+        // Checking to see if getShow() was called
         expect(getShow).toHaveBeenCalled();
 
     });
@@ -51,21 +45,52 @@ describe('getShow application should retrive show information and render it to t
         const listItem = document.createElement('li');
         // const showID = 431;
 
-        // Creating the submit button and adding the event listener
+        // Creating the "get episodes" button and adding the event listener
         const getEpisodeButton = document.createElement('button');
         getEpisodeButton.addEventListener('click', function (event) {
             event.preventDefault();
             getEpisodes();
         });
 
-        // Appending the input and button to the DOM
+        // Appending the HTML elements and button to the DOM
+        document.body.append(getEpisodeButton);
         episodeList.append(listItem);
         show.append(episodeList);
 
-        // Triggering the "click" event on the submit button
+        // Triggering the "click" event
         getEpisodeButton.dispatchEvent(new Event('click'));
 
-        // Checking to see if appendResults() was called
+
+        // Checking to see if getEpisodes() was called
         expect(getEpisodes).toHaveBeenCalled();
+
+    });
+    it('should call clearPage() and clear the DOM when called', function () {
+        spyOn(window, 'clearPage');
+
+        // Creating the element inputs and assigning their values
+        const show = document.createElement('section');
+        const episodeList = document.querySelector('ul');
+        const listItem = document.querySelector('li');
+        episodeList.append(listItem);
+        show.append(episodeList);
+        document.body.append(show);
+
+        // Creating the delete button and adding the event listener
+        const deleteButton = document.createElement('button');
+        deleteButton.addEventListener('click', function (event) {
+            event.preventDefault();
+            clearPage();
+        });
+
+        // Removing the elements from the DOM
+        episodeList.remove();
+        listItem.remove();
+
+        // Triggering the "click" event
+        deleteButton.dispatchEvent(new Event('click'));
+
+        // Checking to see if clearPage() was called
+        expect(clearPage).toHaveBeenCalled();
     });
 });
