@@ -21,7 +21,7 @@ async function getShow(show) {
         const response = await axios.get(`https://api.tvmaze.com/singlesearch/shows?q=${show}`);
         // If there is no image, a different image will load
         if (!response.data.image.medium) {
-            // This code has not been tested yet as I have not yet found and API without an image.
+            // This code has not been tested yet as I have not yet found an API without an image.
             img.setAttribute('src', 'https://t4.ftcdn.net/jpg/04/00/24/31/240_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg');
         }
         else {
